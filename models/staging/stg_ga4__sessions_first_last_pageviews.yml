@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: stg_ga4__sessions_first_last_pageviews
+    description: >
+      Maps each session to the first and last page_view events recorded within that session
+      using event timestamps. Useful for understanding entry and exit content per session.
+    columns:
+      - name: session_key
+        description: Unique identifier for the session generated in stg_ga4__events.
+        tests:
+          - not_null
+          - unique
+      - name: first_page_view_event_key
+        description: Event key for the earliest page_view within the session.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ga4__events')
+              field: event_key
+      - name: last_page_view_event_key
+        description: Event key for the latest page_view within the session.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ga4__events')
+              field: event_key
