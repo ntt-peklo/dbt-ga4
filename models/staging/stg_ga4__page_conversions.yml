@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: stg_ga4__page_conversions
+    description: >
+      Aggregates conversion event counts for each page instance by page_key. This model
+      is enabled only when conversion_events are defined and counts each configured
+      event name for the corresponding page location and date.
+    columns:
+      - name: page_key
+        description: >
+          Deterministic key built from event_date_dt and page_location used to identify
+          a specific page instance within stg_ga4__events.
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('stg_ga4__events')
+              field: page_key

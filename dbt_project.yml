@@ -1,6 +1,7 @@
 name: 'ga4'
 version: '5.0.0'
 config-version: 2
+profile: 'ga4'
 model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
